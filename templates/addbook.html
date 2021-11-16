@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <link rel="stylesheet"
+        href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css"
+        integrity="sha384-PsH8R72JQ3SOdhVi3uxftmaW6Vc51MKb0q5P2rRUpPvrszuE4W1povHYgTpBfshb"
+        crossorigin="anonymous">
+</head>
+<body>
+    <div class="container">
+        <div class="row">
+
+            <div class="col-sm-8 offset-md-2">
+                <br/>
+                <h1 class="text-center">THE CLOUD LIBRARY<br/>
+                <br/>
+                </h1>
+            </div>
+
+            <div class="col-md-8 offset-md-2">
+                <div>
+                    <form method="Post"  action="{{ url_for('data') }}">
+                            <h2 class="text-center">Enter Book Informations :<br/><br/>
+                            </h2>
+                            <div>Book</div>
+                            <input id="Book-name"
+                                type="text" class="form-control"
+                                placeholder="Book Name" name="Book">
+                            <div>Author</div>
+                            <input id="Author-name"
+                                type="text" class="form-control"
+                                placeholder="Author Name" name="Author">
+                            <div>Year</div>
+                            <input id="Book-year"
+                                type="text" class="form-control"
+                                placeholder="Book Year" name="Year">
+                            <div>Genre</div>
+                            <input id="Book-genre"
+                                type="text" class="form-control"
+                                placeholder="Book Genre" name="Genre">
+                            </br>
+                        <input type="submit" value="ADD BOOK" class="btn btn-primary btn-block">
+
+                    </form>
+                </div>
+
+            </div>
+        </div>
+    </div>
+    <script src="https://code.jquery.com/jquery-3.2.1.min.js"
+            integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4="
+            crossorigin="anonymous"></script>
+
+</body>
+</html>
