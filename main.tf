@@ -1,5 +1,5 @@
 provider "aws" {
-  region = "us-east-1"
+  region = "eu-west-1"
 }
 
 data "aws_ssm_parameter" "ami_id" {
@@ -13,11 +13,18 @@ module "vpc" {
   name = "my-vpc"
   cidr = "10.0.0.0/16"
 
-  azs            = ["us-east-1a"]
+  azs            = ["eu-west-1a"]
   public_subnets = ["10.0.1.0/24"]
 
 
 }
+terraform {
+  backend "s3" {
+    bucket = "s3-tarek-bucket-773"
+    key    = "terraform.tfstates"
+  }
+}
+
 
 
 resource "aws_security_group" "my-sg" {
@@ -40,7 +47,7 @@ resource "aws_security_group" "my-sg" {
   }
 
   tags = {
-    Name = "Terraform-Dynamic-SG"
+    Name = "Websecurity-SG"
   }
 }
 
@@ -48,6 +55,8 @@ resource "aws_instance" "my-instance" {
   ami             = data.aws_ssm_parameter.ami_id.value
   subnet_id       = module.vpc.public_subnets[0]
   instance_type   = "t3.micro"
+  key_name = "key-1"
   security_groups = [aws_security_group.my-sg.id]
-  user_data       = fileexists("script.sh") ? file("script.sh") : null
+  user_data       = "${file("install.sh")}"
+  tags = {Name = "Library web server"}
 }
