@@ -2,9 +2,9 @@ provider "aws" {
   region = "eu-west-1"
 }
 
-data "aws_ssm_parameter" "ami_id" {
-  name = "/aws/service/ami-amazon-linux-latest/amzn2-ami-hvm-x86_64-gp2"
-}
+#data "aws_ssm_parameter" "ami_id" {
+#name = "/aws/service/ami-amazon-linux-latest/amzn2-ami-hvm-x86_64-gp2"
+#}
 
 
 module "vpc" {
@@ -52,11 +52,12 @@ resource "aws_security_group" "my-sg" {
 }
 
 resource "aws_instance" "my-instance" {
-  ami             = data.aws_ssm_parameter.ami_id.value
+  ami             = "ami-0ec23856b3bad62d3"
   subnet_id       = module.vpc.public_subnets[0]
   instance_type   = "t3.micro"
   key_name = "key-1"
   security_groups = [aws_security_group.my-sg.id]
-  user_data       = "${file("install.sh")}"
   tags = {Name = "Library web server"}
+
+  user_data       = file("./install.sh")
 }

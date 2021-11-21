@@ -16,9 +16,9 @@ variable "rules" {
       cidr_blocks = ["0.0.0.0/0"]
     },
     {
-      port        = 3689
+      port        = 5000
       proto       = "tcp"
-      cidr_blocks = ["6.7.8.9/32"]
+      cidr_blocks = ["0.0.0.0/0"]
     }
   ]
 
